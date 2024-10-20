@@ -1,5 +1,6 @@
-const path = require("path");
-const fetch = require("node-fetch");
+import path from "path";
+import fetch from "node-fetch";
+import type { GatsbyNode } from "gatsby";
 
 const POKEMONS = [
   "pikachu",
@@ -13,11 +14,11 @@ const POKEMONS = [
   "haunter",
 ];
 
-exports.createPages = async ({ actions }) => {
+export const createPages: GatsbyNode["createPages"] = async ({ actions }) => {
   const { createPage } = actions;
 
   for (const poke of POKEMONS) {
-    console.log(`==== FETCHING DATA FOR POKEMON: ${poke} ====`);
+    console.info(`==== FETCHING DATA FOR POKEMON: ${poke} ====`);
 
     try {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${poke}`);
@@ -29,13 +30,14 @@ exports.createPages = async ({ actions }) => {
       }
 
       const pokeData = await response.json();
-      console.log(`Data for ${poke} fetched successfully!`);
+      console.info(`Data for ${poke} fetched successfully!`);
 
       createPage({
         path: `/static/${poke}`,
         component: path.resolve("./src/templates/pokemon.tsx"),
         context: {
           pokeData,
+          title: poke,
         },
       });
     } catch (error) {

@@ -47,6 +47,16 @@ export const wrapPageElement: GatsbyBrowser["wrapPageElement"] = ({
         >
           SSR
         </Link>
+        <Link
+          style={{
+            background: "white",
+            color: "black",
+            padding: 16,
+          }}
+          to="/dsg"
+        >
+          DSG
+        </Link>
       </nav>
       {element}
     </div>
