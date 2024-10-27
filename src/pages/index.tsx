@@ -1,20 +1,18 @@
 import * as React from "react";
 import { Link, type HeadFC, type PageProps } from "gatsby";
+import { Button } from "../components/button";
 
 const POKEMONS = ["gastly", "voltorb", "arcanine"];
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <div className="h-screen mt-10">
+    <div className="h-screen mt-10 container mx-auto">
       <ul className="flex gap-4">
         {POKEMONS.map((v) => (
-          <li className="p-4">
-            <Link
-              className="bg-red-100 p-4 transition-all rounded-md hover:bg-red-300"
-              to={`/${v}`}
-            >
-              {v}
-            </Link>
+          <li key={v} className="p-4">
+            <Button asChild>
+              <Link to={`/${v}`}>{v}</Link>
+            </Button>
           </li>
         ))}
       </ul>

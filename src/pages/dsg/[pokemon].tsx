@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link, type HeadFC, type PageProps } from "gatsby";
 import { POKEAPI_BASE_URL } from "../../lib/constants";
+import { Button } from "../../components/button";
 
 const PokemonPage: React.FC<PageProps> = ({ params }) => {
   const [data, setData] = React.useState<any>();
@@ -10,25 +11,20 @@ const PokemonPage: React.FC<PageProps> = ({ params }) => {
 
   React.useEffect(() => {
     setLoading(true);
-    setTimeout(() => {
-      fetch(`${POKEAPI_BASE_URL}/pokemon/${pokemon}`)
-        .then((r) => r.json())
-        .then((v) => setData(v))
-        .catch((e) => console.error(e))
-        .finally(() => setLoading(false));
-    }, 1000);
+    fetch(`${POKEAPI_BASE_URL}/pokemon/${pokemon}`)
+      .then((r) => r.json())
+      .then((v) => setData(v))
+      .catch((e) => console.error(e))
+      .finally(() => setLoading(false));
   }, []);
 
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="h-screen p-4">
-      <Link
-        to="/dsg"
-        className="bg-red-100 p-4 mb-10 inline-block  transition-all rounded-md hover:bg-red-300"
-      >
-        Back
-      </Link>
+    <div className="h-screen container mx-auto p-4">
+      <Button asChild>
+        <Link to="/dsg">Back</Link>
+      </Button>
       <h1 className="capitalize mt-10">{pokemon} data:</h1>
       {data && (
         <pre className="!bg-gray-100 p-2 rounded-md max-w-[90%]">
@@ -46,9 +42,9 @@ export const Head: HeadFC = ({ params }) => {
 };
 
 export async function config() {
-  return ({ params }) => {
+  return () => {
     return {
-      defer: params.pokemon !== "arbok",
+      defer: true,
     };
   };
 }

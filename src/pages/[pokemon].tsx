@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link, type HeadFC, type PageProps } from "gatsby";
 import { POKEAPI_BASE_URL } from "../lib/constants";
+import { Button } from "../components/button";
 
 const IndexPage: React.FC<PageProps> = ({ params }) => {
   const [data, setData] = React.useState<any>();
@@ -22,13 +23,10 @@ const IndexPage: React.FC<PageProps> = ({ params }) => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="h-screen p-4">
-      <Link
-        to="/"
-        className="bg-red-100 p-4 mb-10 inline-block  transition-all rounded-md hover:bg-red-300"
-      >
-        Back
-      </Link>
+    <div className="h-screen container mx-auto p-4">
+      <Button asChild>
+        <Link to="/">Back</Link>
+      </Button>
       <h1 className="capitalize mt-10">{pokemon} data:</h1>
       {data && (
         <pre className="!bg-gray-100 p-2 rounded-md max-w-[90%]">

@@ -1,6 +1,7 @@
 import "./src/styles/global.css";
 import * as React from "react";
 import { Link, type GatsbyBrowser } from "gatsby";
+import { Button } from "./src/components/button";
 
 export const wrapPageElement: GatsbyBrowser["wrapPageElement"] = ({
   element,
@@ -17,46 +18,18 @@ export const wrapPageElement: GatsbyBrowser["wrapPageElement"] = ({
           gap: 16,
         }}
       >
-        <Link
-          style={{
-            background: "white",
-            color: "black",
-            padding: 16,
-          }}
-          to="/"
-        >
-          Default
-        </Link>
-        <Link
-          style={{
-            background: "white",
-            color: "black",
-            padding: 16,
-          }}
-          to="/static"
-        >
-          Static
-        </Link>
-        <Link
-          style={{
-            background: "white",
-            color: "black",
-            padding: 16,
-          }}
-          to="/ssr"
-        >
-          SSR
-        </Link>
-        <Link
-          style={{
-            background: "white",
-            color: "black",
-            padding: 16,
-          }}
-          to="/dsg"
-        >
-          DSG
-        </Link>
+        <Button variant="secondary" asChild>
+          <Link to="/">Default</Link>
+        </Button>
+        <Button variant="secondary" asChild>
+          <Link to="/static">Static</Link>
+        </Button>
+        <Button variant="secondary" asChild>
+          <Link to="/ssr">SSR</Link>
+        </Button>
+        <Button variant="secondary" asChild>
+          <Link to="/dsg">DSG</Link>
+        </Button>
       </nav>
       {element}
     </div>
