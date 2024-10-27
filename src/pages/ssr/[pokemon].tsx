@@ -52,9 +52,11 @@ export async function getServerData(
       throw new Error(`Response failed`);
     }
 
+    const poke = await res.json();
+
     return {
       props: {
-        poke: await res.json(),
+        poke,
       },
     };
   } catch (error) {
