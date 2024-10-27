@@ -55,6 +55,8 @@ export async function getServerData(
     const poke = await res.json();
 
     return {
+      status: 200,
+      headers: {},
       props: {
         poke,
       },
